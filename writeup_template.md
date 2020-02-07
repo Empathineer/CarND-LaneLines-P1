@@ -23,13 +23,21 @@ The goals / steps of this project are the following:
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
+My pipeline consisted of the following high-level steps. 
 
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
+1. The image is first converted into an hsv colorspace. 
 
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
+2. Using the Gaussian bur, the "white noise" in the hsv_image is reduced so that only the significant features are highlighted. 
 
-![alt text][image1]
+3. The Canny() method is then applied this smoothen image to generate edges of those features. 
+
+4. The region_of_interest function is called providing the Canny output image and vertices of the target region. 
+
+5. Hough transform is applied within the binary region of interest. This function invokes drawlines(), which will take the lines from the Hough output image and classfiy them as right or left lanes based on their slopes. Assuming a line will be extended to the bottom of the image, the line will be drawn relative to the y-min of the lines. This value is slightly offset to avoid crossing at the top. Averages of the slopes and intercepts are calculated for both sides and used to draw an average line on the hough image.
+
+6. This binary line image is then imposed on the original image using weighted_img() to give the final image. 
+
+
 
 
 ### 2. Identify potential shortcomings with your current pipeline
@@ -39,9 +47,19 @@ One potential shortcoming would be what would happen when ...
 
 Another shortcoming could be ...
 
+1. If the lanes are curving too drastically, we can no longer assume the right lane is sloping negatively. 
+2. If the lanes are curving to the left, we encounter the same invalid assumption. 
+3. An obstacle along target lane will be included in the region of interest and may skew the averages. 
+4. Pipeline doesn't 
+
+
 
 ### 3. Suggest possible improvements to your pipeline
 
 A possible improvement would be to ...
 
 Another potential improvement could be to ...
+
+1. Label the lines as positive or negative slopes first and then pass it through a nested conditional to determine if this is in fact a right or left lane. If there exists a line to the right or  
+2. Distinguish geometry of lanes from an obstacle and look at the rec
+3. 
