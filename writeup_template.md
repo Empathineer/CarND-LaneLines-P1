@@ -31,14 +31,13 @@ My pipeline consisted of the following high-level steps.
 
 3. The Canny() method is then applied this smoothen image to generate edges of those features. 
 
-4. The region_of_interest function is called providing the Canny output image and vertices of the target region. 
+4. The region containing the lanes is then defined on the Canny output image. An offset value from the image's horizontal and vertical center is created. The lanes are not assumed to be symmetrical about the driver's centerline. 
 
 5. Hough transform is applied within the binary region of interest. This function invokes drawlines(), which will take the lines from the Hough output image and classfiy them as right or left lanes based on their slopes. Assuming a line will be extended to the bottom of the image, the line will be drawn relative to the y-min of the lines. This value is slightly offset to avoid crossing at the top. Averages of the slopes and intercepts are calculated for both sides and used to draw an average line on the hough image.
 
-6. This binary line image is then imposed on the original image using weighted_img() to give the final image. 
+6. This binary line image is then imposed on the original image using weighted_img() to give the final image. The output images are displayed below.  
 
-
-
+![test image1](/test_images/)
 
 ### 2. Identify potential shortcomings with your current pipeline
 
