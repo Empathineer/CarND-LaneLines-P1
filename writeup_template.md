@@ -45,7 +45,6 @@ My pipeline consisted of the following high-level steps.
 1. If the lanes are curving too drastically, we can no longer assume the right lane is sloping negatively. 
 2. If the lanes are curving to the left, we encounter the same invalid assumption. 
 3. An obstacle along target lane will be included in the region of interest and may skew the averages. 
-4. Pipeline doesn't 
 
 
 
@@ -55,6 +54,6 @@ A possible improvement would be to ...
 
 Another potential improvement could be to ...
 
-1. Label the lines as positive or negative slopes first and then pass it through a nested conditional to determine if this is in fact a right or left lane. If there exists a line to the right or  
-2. Distinguish geometry of lanes from an obstacle and look at the rec
-3. 
+1. Label the lines as positive or negative slopes first and then pass it through a nested conditional to determine if this is in fact a right or left lane. If there exists a line to the right of an initially classified right line within the region of interest, it will need to be appended to the "left" list. 
+2. Distinguish geometry of lanes from an obstacle. Alternatively, maybe the program can assume an object is 
+3. Votes are determined by 
