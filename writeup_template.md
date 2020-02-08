@@ -33,18 +33,14 @@ My pipeline consisted of the following high-level steps.
 
 4. The region containing the lanes is then defined on the Canny output image. An offset value from the image's horizontal and vertical center is created. The lanes are not assumed to be symmetrical about the driver's centerline. 
 
-5. Hough transform is applied within the binary region of interest. This function invokes drawlines(), which will take the lines from the Hough output image and classfiy them as right or left lanes based on their slopes. Assuming a line will be extended to the bottom of the image, the line will be drawn relative to the y-min of the lines. This value is slightly offset to avoid crossing at the top. Averages of the slopes and intercepts are calculated for both sides and used to draw an average line on the hough image.
+5. Hough transform is applied within the binary region of interest. This function invokes drawlines(), which will take the lines from the Hough output image and classfiy them as right or left lanes based on their slopes.  Assuming a line will be extended to the bottom of the image, the line will be drawn relative to the y-min of the lines. This value is slightly offset to avoid crossing at the top. Averages of the slopes and intercepts are calculated and used to calcuate the line coordinate pairs by rearranging the slope-intercept equation. 
 
-6. This binary line image is then imposed on the original image using weighted_img() to give the final image. The output images are displayed below.  
+6. This binary line image is then imposed on the original image using weighted_img() to give the final output image as shown below. 
 
-![test image1](/test_images/)
+![output image1](/test_images/solidWhiteRight.jpg)
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
 
 1. If the lanes are curving too drastically, we can no longer assume the right lane is sloping negatively. 
 2. If the lanes are curving to the left, we encounter the same invalid assumption. 
